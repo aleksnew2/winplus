@@ -1,5 +1,10 @@
+/**
+ * The header provides functionality to create, manipulate, and display message
+ * boxes using the Windows API.
+ * 
+ * Still under development.
+ */
 #include <windows.h>
-
 #ifndef WINPLUS_WMB_H
 #define WINPLUS_WMB_H
 #ifdef WINPLUS_EXPORTS
