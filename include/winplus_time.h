@@ -10,17 +10,19 @@
 
 enum TIME_TYPE
 {
-  SECOND,
-  MINUTE,
-  HOUR
+  TT_MICROSECONDS,
+  TT_MILLISECONDS,
+  TT_SECOND,
+  TT_MINUTE,
+  TT_HOUR
 };
 
 typedef void(EVENT)();
 
 extern "C" WINPLUS_API void
-WAIT(TIME_TYPE tt, uint16_t time);
+WAIT(TIME_TYPE tt, uint16_t time) noexcept;
 
 extern "C" WINPLUS_API void
-WAIT_Q(TIME_TYPE tt, uint16_t time, EVENT e);
+WAIT_Q(TIME_TYPE tt, uint16_t time, EVENT e) noexcept;
 
 #endif
