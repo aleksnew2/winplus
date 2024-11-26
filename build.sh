@@ -1,0 +1,1 @@
+g++ -fpic -shared src/*.c++ -Iinclude -o winplus.dll
