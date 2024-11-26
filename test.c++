@@ -1,9 +1,9 @@
 #include "include/winplus.h"
+#include <iostream>
 
 int
 main()
 {
-  auto s = WMB_CREATE(WMB_TYPE::WMB_ERROR, L"HI!", L"HELLO");
-  WMB_SHOW(s);
-  return 0;
+  WAIT(TT_SECOND, 2);
+  std::cout << "HI!" << std::endl;
 }

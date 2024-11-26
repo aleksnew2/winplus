@@ -5,24 +5,21 @@
 void
 WAIT(TIME_TYPE tt, uint16_t time) noexcept
 {
-  using namespace std::chrono;
-  using namespace std::this_thread;
-
   switch (tt) {
     case TT_MICROSECONDS:
-      sleep_for(microseconds(time));
+      std::this_thread::sleep_for(std::chrono::microseconds(time));
       break;
     case TT_MILLISECONDS:
-      sleep_for(milliseconds(time));
+      std::this_thread::sleep_for(std::chrono::milliseconds(time));
       break;
     case TT_SECOND:
-      sleep_for(seconds(time));
+      std::this_thread::sleep_for(std::chrono::seconds(time));
       break;
     case TT_MINUTE:
-      sleep_for(minutes(time));
+      std::this_thread::sleep_for(std::chrono::minutes(time));
       break;
     case TT_HOUR:
-      sleep_for(hours(time));
+      std::this_thread::sleep_for(std::chrono::hours(time));
       break;
   }
 }
