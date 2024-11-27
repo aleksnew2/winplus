@@ -23,3 +23,10 @@ WAIT(TIME_TYPE tt, uint16_t time) noexcept
       break;
   }
 }
+
+void
+WAIT_Q(TIME_TYPE tt, uint16_t time, EVENT e) noexcept
+{
+  WAIT(tt, time);
+  e();
+}
