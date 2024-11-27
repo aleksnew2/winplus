@@ -1,7 +1,7 @@
 /**
  * The header provides functionality to create, manipulate, and display message
  * boxes using the Windows API.
- * 
+ *
  * Still under development.
  */
 #include <windows.h>
@@ -13,43 +13,40 @@
 #define WINPLUS_API __declspec(dllimport)
 #endif
 
-enum WMB_TYPE
+enum wmb_type
 {
-  WMB_ERROR = MB_ICONERROR + MB_OK,
-  WMB_WARNING = MB_ICONWARNING + MB_OK,
-  WMB_INFO = MB_ICONINFORMATION + MB_OK
+  wmb_error = MB_ICONERROR + MB_OK,
+  wmb_warning = MB_ICONWARNING + MB_OK,
+  wmb_info = MB_ICONINFORMATION + MB_OK
 };
 
-extern "C" struct WIN_MESSAGEBOX
+extern "C" struct win_messagebox
 {
-  WMB_TYPE type;
+  wmb_type type;
   const wchar_t* title;
   const wchar_t* className;
   bool is_open;
 };
 
-extern "C" WINPLUS_API WIN_MESSAGEBOX
-WMB_CREATE(WMB_TYPE type, const wchar_t* title, const wchar_t* className);
-
-extern "C" WINPLUS_API WIN_MESSAGEBOX
-WMB_IS(int s, int d);
+extern "C" WINPLUS_API win_messagebox
+wmb_create(wmb_type type, const wchar_t* title, const wchar_t* className);
 
 extern "C" WINPLUS_API void
-WMB_CHANGE_TITLE(WIN_MESSAGEBOX& wmb, const wchar_t* nw);
+wmb_change_title(win_messagebox& wmb, const wchar_t* nw);
 
 extern "C" WINPLUS_API void
-WMB_CHANGE_CLASSNAME(WIN_MESSAGEBOX& wmb, const wchar_t* nw);
+wmb_change_classname(win_messagebox& wmb, const wchar_t* nw);
 
 extern "C" WINPLUS_API void
-WMB_CLOSE(WIN_MESSAGEBOX& wmb);
+wmb_close(win_messagebox& wmb);
 
 extern "C" WINPLUS_API void
-WMB_RESTART(WIN_MESSAGEBOX& wmb);
+wmb_restart(win_messagebox& wmb);
 
 extern "C" WINPLUS_API int
-WMB_SHOW(WIN_MESSAGEBOX& wmb);
+wmb_show(win_messagebox& wmb);
 
 extern "C" WINPLUS_API bool
-WMB_IS_OPEN(WIN_MESSAGEBOX& wmb);
+wmb_is_open(win_messagebox& wmb);
 
 #endif // WINPLUS_WMB_H

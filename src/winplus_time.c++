@@ -3,30 +3,30 @@
 #include <thread>
 
 void
-WAIT(TIME_TYPE tt, uint16_t time) noexcept
+wait(time_type tt, uint16_t time) noexcept
 {
   switch (tt) {
-    case TT_MICROSECONDS:
+    case tt_microseconds:
       std::this_thread::sleep_for(std::chrono::microseconds(time));
       break;
-    case TT_MILLISECONDS:
+    case tt_milliseconds:
       std::this_thread::sleep_for(std::chrono::milliseconds(time));
       break;
-    case TT_SECOND:
+    case tt_second:
       std::this_thread::sleep_for(std::chrono::seconds(time));
       break;
-    case TT_MINUTE:
+    case tt_minute:
       std::this_thread::sleep_for(std::chrono::minutes(time));
       break;
-    case TT_HOUR:
+    case tt_hour:
       std::this_thread::sleep_for(std::chrono::hours(time));
       break;
   }
 }
 
 void
-WAIT_Q(TIME_TYPE tt, uint16_t time, EVENT e) noexcept
+wait_q(time_type tt, uint16_t time, win_event e) noexcept
 {
-  WAIT(tt, time);
+  wait(tt, time);
   e();
 }

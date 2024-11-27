@@ -13,21 +13,21 @@
 #define WINPLUS_API __declspec(dllimport)
 #endif
 
-enum TIME_TYPE
+enum time_type
 {
-  TT_MICROSECONDS,
-  TT_MILLISECONDS,
-  TT_SECOND,
-  TT_MINUTE,
-  TT_HOUR
+  tt_microseconds,
+  tt_milliseconds,
+  tt_second,
+  tt_minute,
+  tt_hour
 };
 
-typedef void(EVENT)();
+typedef void(win_event)();
 
 extern "C" WINPLUS_API void
-WAIT(TIME_TYPE tt, uint16_t time) noexcept;
+wait(time_type tt, uint16_t time) noexcept;
 
 extern "C" WINPLUS_API void
-WAIT_Q(TIME_TYPE tt, uint16_t time, EVENT e) noexcept;
+wait_q(time_type tt, uint16_t time, win_event e) noexcept;
 
 #endif

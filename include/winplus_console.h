@@ -6,13 +6,14 @@
 #define WINPLUS_API __declspec(dllimport)
 #endif
 
-enum WIN_CONSOLE_TYPE
+enum win_console_type
 {
-  WC_ERROR,
-  WC_INFO,
-  WC_WARNING
+  wc_error,
+  wc_info,
+  wc_warning
 };
 
-void WIN_CONSOLE_LOG(WIN_CONSOLE_TYPE wct, const wchar_t* message);
+void
+win_console_log(win_console_type wct, const wchar_t* message);
 
 #endif

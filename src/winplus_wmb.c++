@@ -2,10 +2,10 @@
 #include <bits/this_thread_sleep.h>
 #include <cassert>
 
-WIN_MESSAGEBOX
-WMB_CREATE(WMB_TYPE type, const wchar_t* title, const wchar_t* className)
+win_messagebox
+wmb_create(wmb_type type, const wchar_t* title, const wchar_t* className)
 {
-  auto wmb = WIN_MESSAGEBOX{};
+  auto wmb = win_messagebox{};
   wmb.type = type;
   wmb.title = title;
   wmb.className = className;
@@ -14,19 +14,19 @@ WMB_CREATE(WMB_TYPE type, const wchar_t* title, const wchar_t* className)
 }
 
 void
-WMB_CHANGE_TITLE(WIN_MESSAGEBOX& wmb, const wchar_t* nw)
+wmb_change_title(win_messagebox& wmb, const wchar_t* nw)
 {
   wmb.title = nw;
 }
 
 void
-WMB_CHANGE_CLASSNAME(WIN_MESSAGEBOX& wmb, const wchar_t* nw)
+wmb_change_classname(win_messagebox& wmb, const wchar_t* nw)
 {
   wmb.className = nw;
 }
 
 void
-WMB_CLOSE(WIN_MESSAGEBOX& wmb)
+wmb_close(win_messagebox& wmb)
 {
   assert(wmb.is_open == true);
   auto hwnd = FindWindowW(wmb.className, wmb.title);
@@ -36,21 +36,21 @@ WMB_CLOSE(WIN_MESSAGEBOX& wmb)
 }
 
 void
-WMB_RESTART(WIN_MESSAGEBOX& wmb)
+wmb_restart(win_messagebox& wmb)
 {
-  WMB_CLOSE(wmb);
+  wmb_close(wmb);
   std::this_thread::sleep_for(std::chrono::seconds{ 2 });
-  WMB_SHOW(wmb);
+  wmb_show(wmb);
 }
 
 int
-WMB_SHOW(WIN_MESSAGEBOX& wmb)
+wmb_show(win_messagebox& wmb)
 {
   return MessageBoxW(NULL, wmb.title, wmb.className, wmb.type);
 }
 
 bool
-WMB_IS_OPEN(WIN_MESSAGEBOX& wmb)
+wmb_is_open(win_messagebox& wmb)
 {
   return wmb.is_open;
 }
