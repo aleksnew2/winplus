@@ -1,3 +1,8 @@
+/**
+ * The header provides time-related functions.
+ * 
+ * Still under development.
+ */
 #include <cstdint>
 
 #ifndef WINPLUS_TIME_H
