@@ -13,7 +13,7 @@ enum win_console_type
   wc_warning
 };
 
-void
+WINPLUS_API void
 win_console_log(win_console_type wct, const wchar_t* message);
 
 #endif
