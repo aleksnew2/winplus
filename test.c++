@@ -1,9 +1,14 @@
 #include "include/winplus.h"
 #include <iostream>
 
+void
+print()
+{
+  std::cout << "HI!" << std::endl;
+}
+
 int
 main()
 {
-  WAIT(TT_SECOND, 2);
-  std::cout << "HI!" << std::endl;
+  WAIT_Q(TT_SECOND, 5, print);
 }
