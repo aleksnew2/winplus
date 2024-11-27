@@ -1,7 +1,7 @@
 #include <cstdint>
 
-#ifndef WINPLUS_CONSOLE_H
-#define WINPLUS_CONSOLE_H
+#ifndef WINPLUS_TIME_H
+#define WINPLUS_TIME_H
 #ifdef WINPLUS_EXPORTS
 #define WINPLUS_API __declspec(dllexport)
 #else
