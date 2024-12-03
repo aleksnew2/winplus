@@ -19,6 +19,13 @@ typedef struct {
   i32 Id;
 } WinMessageBoxPlus;
 
+typedef struct {
+  WinSizePlus Size;
+  WinPosPlus Position;
+  const wc16 *Title;
+  i32 Id;
+} WindowPlus;
+
 typedef enum {
   WMB_ERROR = MB_ICONERROR + MB_OK,
   WMB_WARNING = MB_ICONWARNING + MB_OK,
