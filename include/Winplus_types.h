@@ -388,9 +388,7 @@ typedef ptrdiff_t pdiff;
  *
  *     iptr address = 0x10000000;
  *
- *     iptr offset = 100;Me
-
-add space after each line of correct and wrong code
+ *     iptr offset = 100;
  * 
  * Wrong usage:
  *     iptr hugeValue = 5000000000; // ERROR: Value may exceed range
