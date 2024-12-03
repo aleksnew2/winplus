@@ -11,4 +11,10 @@ typedef struct {
   i16 PosX;
   i16 PosY;
 } WinPosPlus;
+
+typedef struct {
+  const wc16 *Title;
+  const wc16 *ClassName;
+  i32 Id;
+} WinMessageBoxPlus;
 }
