@@ -1,5 +1,5 @@
 /*
-  A header provides types with detailed description and examples.
+  The header provides types with detailed description and examples.
 */
 #include <cstdint>
 
