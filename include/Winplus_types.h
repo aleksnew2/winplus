@@ -1,3 +1,6 @@
+/*
+  A header provides types with detailed description and examples.
+*/
 #include <cstdint>
 
 extern "C" {
