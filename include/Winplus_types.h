@@ -1,5 +1,6 @@
 #include <cstdint>
 
+extern "C" {
 typedef int8_t i8;
 typedef int16_t i16;
 typedef int32_t i32;
@@ -30,3 +31,4 @@ typedef long l32;
 typedef unsigned long ul32;
 typedef long long ll64;
 typedef unsigned long long ull64;
+}
