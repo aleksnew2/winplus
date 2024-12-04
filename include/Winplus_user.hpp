@@ -60,6 +60,14 @@ public:
   WINPLUS_API void Close();
 
   /**
+   * Opens a message box.
+   *
+   * Displays the specified message box to the user,
+   * allowing interaction with the message box content.
+   */
+  WINPLUS_API void Open();
+
+  /**
    * Forcefully terminates a message box.
    *
    * Immediately closes the specified message box, regardless of its state.
