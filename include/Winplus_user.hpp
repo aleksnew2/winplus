@@ -1,5 +1,5 @@
-#include "Winplus_defines.h"
-#include "Winplus_types.h"
+#include "Winplus_defines.hpp"
+#include "Winplus_types.hpp"
 #include <complex.h>
 #include <windows.h>
 
