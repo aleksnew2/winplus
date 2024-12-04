@@ -114,6 +114,14 @@ public:
   WINPLUS_API void Kill();
 
   /**
+   * Opens a window.
+   *
+   * Displays the specified window on the screen, allowing user interaction
+   * with the window content.
+   */
+  WINPLUS_API void Open();
+
+  /**
    * Gets the width of a window.
    *
    * Retrieves and returns the width of the specified window in pixels.
