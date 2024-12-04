@@ -3,6 +3,9 @@
 #include <complex.h>
 #include <windows.h>
 
+#ifndef WINPLUS_USER_H
+#define WINPLUS_USER_H
+
 /**
  * Enumeration of message box types with predefined styles.
  *
@@ -49,7 +52,7 @@ class WINPLUS_API WinMessageBoxPlus {
 public:
   const string Title;     /**< Window title. */
   const string ClassName; /**< Window class name. */
-  i32 Id;                 /**< Unique identifier for the message box */
+  u32 Id;                 /**< Unique identifier for the message box */
 
   /**
    * Closes a message box.
@@ -95,7 +98,7 @@ public:
   WinSizePlus Size;    /**< Window size information */
   WinPosPlus Position; /**< Window position information */
   const string Title;  /**< Window title.  */
-  i32 Id;              /**< Unique identifier for the window */
+  u32 Id;              /**< Unique identifier for the window */
 
   /**
    * Closes a window.
@@ -177,4 +180,6 @@ WINPLUS_API WindowPlus WP_Init(i16 x, i16 y, u16 width, u16 height,
  * Computes and returns a unique identifier.
  * Useful for tracking and managing.
  */
-WINPLUS_API i32 GenerateID();
+WINPLUS_API u32 GenerateID();
+
+#endif

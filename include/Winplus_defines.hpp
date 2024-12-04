@@ -1,5 +1,4 @@
-#ifdef WINPLUS_EXPORTS
+// oh my god (。>︿<)_θ
+// I forgot this library only supports windows
+// just take out of the memory the thing I've just done.. (┬┬﹏┬┬)
 #define WINPLUS_API __declspec(dllexport)
-#else
-#define WINPLUS_API __declspec(dllimport)
-#endif
