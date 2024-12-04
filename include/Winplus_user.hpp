@@ -53,6 +53,7 @@ public:
   const string Title;     /**< Window title. */
   const string ClassName; /**< Window class name. */
   u32 Id;                 /**< Unique identifier for the message box */
+  WMB_Type Type;          /**< Message box type. */
 
   /**
    * Closes a message box.
@@ -69,14 +70,6 @@ public:
    * allowing interaction with the message box content.
    */
   WINPLUS_API void Open();
-
-  /**
-   * Forcefully terminates a message box.
-   *
-   * Immediately closes the specified message box, regardless of its state.
-   * Useful for emergency shutdown of message boxes.
-   */
-  WINPLUS_API void Kill();
 
   /**
    * Sets the type and style of a message box.
