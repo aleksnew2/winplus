@@ -1,6 +1,7 @@
 #include "Winplus_defines.hpp"
 #include "Winplus_types.hpp"
 #include <complex.h>
+#include <minwindef.h>
 #include <windows.h>
 
 #ifndef WINPLUS_USER_H
@@ -140,6 +141,14 @@ public:
    * Useful for positioning and alignment operations.
    */
   WINPLUS_API i16 GetPosY() const;
+
+  private:
+    LRESULT CALLBACK windowProc(
+      HWND hwnd,
+      UINT uMsg,
+      WPARAM wParam,
+      LPARAM lParam
+    );
 };
 
 /**
