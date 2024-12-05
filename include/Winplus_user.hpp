@@ -50,6 +50,15 @@ struct WinSizePlus {
 struct WinPosPlus {
   i16 PosX; /**< X-coordinate of the window position */
   i16 PosY; /**< Y-coordinate of the window position */
+
+  /** Sets window width. */
+  virtual WINPLUS_API void SetPosX(i16 newData) = 0;
+  /** Sets window height. */
+  virtual WINPLUS_API void SetPosY(i16 newData) = 0;
+  /** Returns window width. */
+  virtual WINPLUS_API i16 GetPosX() = 0;
+  /** Returns window height. */
+  virtual WINPLUS_API i16 GetPosY() = 0;
 };
 
 /**
