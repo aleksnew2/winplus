@@ -142,13 +142,13 @@ public:
    */
   WINPLUS_API i16 GetPosY() const;
 
-  private:
-    LRESULT CALLBACK windowProc(
-      HWND hwnd,
-      UINT uMsg,
-      WPARAM wParam,
-      LPARAM lParam
-    );
+private:
+  LRESULT CALLBACK windowProc(HWND hwnd, UINT uMsg, WPARAM wParam,
+                              LPARAM lParam);
+};
+
+class WINAPI WinComponentPlus {
+  
 };
 
 /**
