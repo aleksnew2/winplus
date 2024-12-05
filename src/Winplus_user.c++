@@ -8,12 +8,12 @@ WINPLUS_API WinMessageBoxPlus WMB_Init(string Title, string ClassName) {
   return WinMessageBoxPlus{Title, ClassName, GenerateID()};
 }
 
-WINPLUS_API WindowPlus WP_Init(i16 x, i16 y, u16 width, u16 height,
-                               const string Title) {
-  WinPosPlus position = {x, y};
-  WinSizePlus size = {width, height};
-  return WindowPlus{size, position, Title, GenerateID()};
-}
+// WINPLUS_API WindowPlus WP_Init(i16 x, i16 y, u16 width, u16 height,
+//                                const string Title) {
+//   WinPosPlus position = {x, y};
+//   WinSizePlus size = {width, height};
+//   return WindowPlus{size, position, Title, GenerateID()};
+// }
 
 WINPLUS_API u32 GenerateID() {
   u32 length = 9;

@@ -30,6 +30,15 @@ enum WMB_Type {
 struct WinSizePlus {
   u16 Width;  /**< Width of the window in pixels */
   u16 Height; /**< Height of the window in pixels */
+
+  /** Sets window width. */
+  virtual WINPLUS_API void SetWidth(u16 newData) = 0;
+  /** Sets window height. */
+  virtual WINPLUS_API void SetHeight(u16 newData) = 0;
+  /** Returns window width. */
+  virtual WINPLUS_API u16 GetWidth() = 0;
+  /** Returns window height. */
+  virtual WINPLUS_API u16 GetHeight() = 0;
 };
 
 /**
@@ -89,8 +98,6 @@ public:
  */
 class WINPLUS_API WindowPlus {
 public:
-  WinSizePlus Size;    /**< Window size information */
-  WinPosPlus Position; /**< Window position information */
   const string Title;  /**< Window title.  */
   u32 Id;              /**< Unique identifier for the window */
 
