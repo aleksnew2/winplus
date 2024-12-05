@@ -102,14 +102,6 @@ public:
   WINPLUS_API void Close();
 
   /**
-   * Forcefully terminates a window.
-   *
-   * Immediately closes the specified window, regardless of its state.
-   * Useful for emergency shutdown of windows.
-   */
-  WINPLUS_API void Kill();
-
-  /**
    * Opens a window.
    *
    * Displays the specified window on the screen, allowing user interaction

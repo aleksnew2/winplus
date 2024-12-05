@@ -4,6 +4,9 @@
 #include <cstdint>
 #include <string>
 
+#ifndef WINPLUS_TYPES_H
+#define WINPLUS_TYPES_H
+
 /* 8-bit signed integer type.
  *
  * A typedef for int8_t providing a consistent naming scheme for 8-bit signed
@@ -237,3 +240,5 @@ typedef long long ll64;
  * Range: 0 to 18,446,744,073,709,551,615 ([0, 2^64 - 1])
  */
 typedef unsigned long long ull64;
+
+#endif
