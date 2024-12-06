@@ -32,13 +32,13 @@ struct WinSizePlus {
   u16 Height; /**< Height of the window in pixels */
 
   /** Sets window width. */
-  virtual WINPLUS_API void SetWidth(u16 newData) = 0;
+  virtual WINPLUS_API void SetWidth(u16 newData);
   /** Sets window height. */
-  virtual WINPLUS_API void SetHeight(u16 newData) = 0;
+  virtual WINPLUS_API void SetHeight(u16 newData);
   /** Returns window width. */
-  virtual WINPLUS_API u16 GetWidth() = 0;
+  virtual WINPLUS_API u16 GetWidth() const;
   /** Returns window height. */
-  virtual WINPLUS_API u16 GetHeight() = 0;
+  virtual WINPLUS_API u16 GetHeight() const;
 };
 
 /**
@@ -52,13 +52,13 @@ struct WinPosPlus {
   i16 PosY; /**< Y-coordinate of the window position */
 
   /** Sets window width. */
-  virtual WINPLUS_API void SetPosX(i16 newData) = 0;
+  virtual WINPLUS_API void SetPosX(i16 newData);
   /** Sets window height. */
-  virtual WINPLUS_API void SetPosY(i16 newData) = 0;
+  virtual WINPLUS_API void SetPosY(i16 newData);
   /** Returns window width. */
-  virtual WINPLUS_API i16 GetPosX() = 0;
+  virtual WINPLUS_API i16 GetPosX() const;
   /** Returns window height. */
-  virtual WINPLUS_API i16 GetPosY() = 0;
+  virtual WINPLUS_API i16 GetPosY() const;
 };
 
 /**
@@ -105,10 +105,10 @@ public:
  * Combines window size, position, title, and identifier into a single
  * structure. Useful for comprehensive window management and manipulation.
  */
-class WINPLUS_API WindowPlus {
+class WINPLUS_API WindowPlus : WinSizePlus, WinPosPlus {
 public:
-  const string Title;  /**< Window title.  */
-  u32 Id;              /**< Unique identifier for the window */
+  const string Title; /**< Window title.  */
+  u32 Id;             /**< Unique identifier for the window */
 
   /**
    * Closes a window.
@@ -163,8 +163,8 @@ private:
                               LPARAM lParam);
 };
 
-class WINAPI WinComponentPlus {
-  
+class WINAPI WinComponentPlus{
+
 };
 
 /**

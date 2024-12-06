@@ -4,6 +4,18 @@
 #include <random>
 #include <windows.h>
 
+WINPLUS_API void WinSizePlus::SetWidth(u16 newData) { this->Width = newData; }
+WINPLUS_API void WinSizePlus::SetHeight(u16 newData) { this->Height = newData; }
+
+WINPLUS_API u16 WinSizePlus::GetWidth() const { return this->Width; }
+WINPLUS_API u16 WinSizePlus::GetHeight() const { return this->Height; }
+
+WINPLUS_API void WinPosPlus::SetPosX(i16 newData) { this->PosX = newData; }
+WINPLUS_API void WinPosPlus::SetPosY(i16 newData) { this->PosY = newData; }
+
+WINPLUS_API i16 WinPosPlus::GetPosX() const { return this->PosX; }
+WINPLUS_API i16 WinPosPlus::GetPosY() const { return this->PosY; }
+
 WINPLUS_API WinMessageBoxPlus WMB_Init(string Title, string ClassName) {
   return WinMessageBoxPlus{Title, ClassName, GenerateID()};
 }
