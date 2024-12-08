@@ -39,10 +39,24 @@ int main() {
   winplus::compiler::lexer::Lexer lexer(content);
   auto tokens = lexer.tokenize();
 
+  // Print tokens
   for (const auto& token : tokens) {
     std::print("Token: {}, Lexeme: '{}', Line: {}\n", 
                tokenTypeToString(token.type), 
                token.lexeme, 
                token.line);
+  }
+
+  // Parse tokens
+  std::print("\nParsing enumerations:\n");
+  winplus::compiler::parser::Parser parser(tokens);
+  auto entries = parser.parse();
+
+  // Print parsed entries
+  for (const auto& entry : entries) {
+    std::print("Enumeration {}:\n", entry.enumId);
+    std::print("  type: '{}'\n", entry.type);
+    std::print("  title: '{}'\n", entry.title);
+    std::print("  id: {}\n", entry.id);
   }
 }

@@ -213,4 +213,69 @@ private:
 };
 
 } // namespace lexer
+
+namespace parser {
+
+/**
+ * Represents an enumeration entry in the configuration
+ */
+struct EnumEntry {
+  int id;
+  std::string type;
+  std::string title;
+  int enumId;
+};
+
+/**
+ * Parser for the configuration language
+ */
+class WINPLUS_API Parser {
+public:
+  explicit Parser(const std::vector<lexer::Lexer::Token>& tokens) 
+    : tokens_(tokens), current_(0) {}
+
+  /**
+   * Parse the entire configuration file
+   * @return Vector of parsed enumeration entries
+   */
+  std::vector<EnumEntry> parse();
+
+private:
+  /**
+   * Parse a single enumeration entry
+   * @return Parsed enumeration entry
+   */
+  EnumEntry parseEnumeration();
+
+  /**
+   * Get the current token
+   */
+  lexer::Lexer::Token peek() const;
+
+  /**
+   * Get the next token
+   */
+  lexer::Lexer::Token advance();
+
+  /**
+   * Check if the current token matches the expected type
+   */
+  bool check(lexer::Lexer::TokenType type) const;
+
+  /**
+   * Consume a token of the expected type or throw an error
+   */
+  lexer::Lexer::Token consume(lexer::Lexer::TokenType type, const std::string& message);
+
+  /**
+   * Check if we've reached the end of input
+   */
+  bool isAtEnd() const;
+
+  const std::vector<lexer::Lexer::Token>& tokens_;
+  size_t current_;
+};
+
+} // namespace parser
+
 } // namespace winplus::compiler

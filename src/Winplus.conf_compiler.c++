@@ -151,4 +151,81 @@ std::vector<lexer::Lexer::Token> Lexer::tokenize() {
 }
 
 } // namespace lexer
+
+namespace parser {
+
+lexer::Lexer::Token Parser::peek() const {
+  if (isAtEnd()) return tokens_[tokens_.size() - 1];
+  return tokens_[current_];
+}
+
+lexer::Lexer::Token Parser::advance() {
+  if (!isAtEnd()) current_++;
+  return tokens_[current_ - 1];
+}
+
+bool Parser::check(lexer::Lexer::TokenType type) const {
+  if (isAtEnd()) return false;
+  return peek().type == type;
+}
+
+lexer::Lexer::Token Parser::consume(lexer::Lexer::TokenType type, const std::string& message) {
+  if (check(type)) return advance();
+  throw std::runtime_error(message);
+}
+
+bool Parser::isAtEnd() const {
+  return current_ >= tokens_.size() || 
+         tokens_[current_].type == lexer::Lexer::TokenType::END_OF_FILE;
+}
+
+EnumEntry Parser::parseEnumeration() {
+  EnumEntry entry;
+  
+  // Parse: enumeration [number]:
+  consume(lexer::Lexer::TokenType::ENUMERATION, "Expected 'enumeration'");
+  auto enumIdToken = consume(lexer::Lexer::TokenType::INT_LITERAL, "Expected enumeration ID");
+  entry.enumId = std::stoi(enumIdToken.lexeme);
+  consume(lexer::Lexer::TokenType::COLON, "Expected ':' after enumeration ID");
+
+  // Parse: type: '[value]'
+  consume(lexer::Lexer::TokenType::TYPE, "Expected 'type'");
+  consume(lexer::Lexer::TokenType::COLON, "Expected ':' after 'type'");
+  auto typeToken = consume(lexer::Lexer::TokenType::STRING_LITERAL, "Expected type value");
+  entry.type = typeToken.lexeme;
+
+  // Parse: title: '[value]'
+  consume(lexer::Lexer::TokenType::TITLE, "Expected 'title'");
+  consume(lexer::Lexer::TokenType::COLON, "Expected ':' after 'title'");
+  auto titleToken = consume(lexer::Lexer::TokenType::STRING_LITERAL, "Expected title value");
+  entry.title = titleToken.lexeme;
+
+  // Parse: id: [number];
+  consume(lexer::Lexer::TokenType::ID, "Expected 'id'");
+  consume(lexer::Lexer::TokenType::COLON, "Expected ':' after 'id'");
+  auto idToken = consume(lexer::Lexer::TokenType::INT_LITERAL, "Expected ID value");
+  entry.id = std::stoi(idToken.lexeme);
+  consume(lexer::Lexer::TokenType::SEMICOLON, "Expected ';' after enumeration");
+
+  return entry;
+}
+
+std::vector<EnumEntry> Parser::parse() {
+  std::vector<EnumEntry> entries;
+  
+  while (!isAtEnd()) {
+    try {
+      entries.push_back(parseEnumeration());
+    } catch (const std::runtime_error& e) {
+      // Skip to the next enumeration or end of file
+      while (!isAtEnd() && !check(lexer::Lexer::TokenType::ENUMERATION)) {
+        advance();
+      }
+    }
+  }
+  
+  return entries;
+}
+
+} // namespace parser
 } // namespace winplus::compiler
