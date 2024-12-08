@@ -1,10 +1,8 @@
 #include "../include/Winplus.hpp"
 #include <cassert>
-#include <cmath>
 #include <cstddef>
 #include <libloaderapi.h>
 #include <minwindef.h>
-#include <random>
 #include <string>
 #include <windows.h>
 #include <winnt.h>
@@ -38,18 +36,6 @@ WINPLUS_API user::WindowPlus user::WP_Init(i16 x, i16 y, u16 width, u16 height,
   wp_instance.Title = Title;
   wp_instance.Id = rand::GenerateID();
   return wp_instance;
-}
-
-WINPLUS_API u32 rand::GenerateID() {
-  u32 length = 9;
-
-  u32 lower_bound = std::pow(10, length - 1);
-  u32 upper_bound = std::pow(10, length) - 1;
-
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_int_distribution<> dis(lower_bound, upper_bound);
-  return dis(gen);
 }
 
 WINPLUS_API void user::WinMessageBoxPlus::Close() {
