@@ -2,6 +2,6 @@
 #include <print>
 
 int main() {
-  const auto code = winplus::rand::GenerateErrorCode();
-  std::println("{}", code);
+  winplus::error::Log(6, "hELLO!");
+  winplus::error::StopProcess(5, "Hi!");
 }
