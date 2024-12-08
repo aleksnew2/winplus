@@ -1,0 +1,9 @@
+enumeration 123:
+    type: 'error'
+    title: 'Error message'
+    id: 456;
+
+enumeration 12233:
+    type: 'error_sd'
+    title: 'Error sdsmessage'
+    id: 4562323;

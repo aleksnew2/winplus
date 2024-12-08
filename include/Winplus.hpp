@@ -1,4 +1,3 @@
-#include "Winplus_defines.hpp"
 #include "Winplus_error.hpp"
 #include "Winplus_rand.hpp"
 #include "Winplus_types.hpp"
