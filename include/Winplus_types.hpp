@@ -254,6 +254,25 @@ typedef long long ll64;
  */
 typedef unsigned long long ull64;
 
+/* Error code type, 16 bits.
+ *
+ * A typedef for u16 providing a standardized error code type.
+ * Used for representing error codes across the application.
+ *
+ * Range: 0 to 65,535 ([0, 2^16 - 1])
+ */
+typedef u16 error_code;
+
+/**
+ * Unique identifier type, 32 bits.
+ *
+ * A typedef for u32 providing a standardized unique identifier type.
+ * Used for representing unique identifiers across the application.
+ *
+ * Range: 0 to 4,294,967,295 ([0, 2^32 - 1])
+ */
+typedef u32 id_code;
+
 } // namespace winplus
 
 #endif
