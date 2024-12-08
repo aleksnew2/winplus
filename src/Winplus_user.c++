@@ -1,8 +1,13 @@
 #include "../include/Winplus.hpp"
+#include <cassert>
 #include <cmath>
 #include <cstddef>
+#include <libloaderapi.h>
+#include <minwindef.h>
 #include <random>
+#include <string>
 #include <windows.h>
+#include <winnt.h>
 
 WINPLUS_API void WinSizePlus::SetWidth(u16 newData) { this->Width = newData; }
 WINPLUS_API void WinSizePlus::SetHeight(u16 newData) { this->Height = newData; }
@@ -52,4 +57,35 @@ WINPLUS_API void WinMessageBoxPlus::Open() {
 
 WINPLUS_API void WinMessageBoxPlus::SetType(WMB_Type type) {
   this->Type = type;
+}
+
+WINPLUS_API void WindowPlus::Open() {
+  auto windowProc = [](HWND hwnd, UINT uMsg, WPARAM wParam,
+                       LPARAM lParam) -> LRESULT CALLBACK {
+    switch (uMsg) {
+    case WM_CLOSE:
+      DestroyWindow(hwnd);
+      break;
+    }
+
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+  };
+
+  HINSTANCE hInstance = (HINSTANCE)GetModuleHandle(NULL);
+  wstring wClassName =
+      std::wstring(this->ClassName.begin(), this->ClassName.end());
+  const wchar_t *CLASS_NAME = wClassName.c_str();
+
+  WNDCLASS wc = {};
+  wc.lpfnWndProc = windowProc;
+  wc.hInstance = hInstance;
+  wc.lpszClassName = reinterpret_cast<LPCSTR>(CLASS_NAME);
+
+  RegisterClass(&wc);
+
+  HWND hwnd = CreateWindowExA(0, reinterpret_cast<LPCSTR>(CLASS_NAME),
+                              reinterpret_cast<LPCSTR>(Title.c_str()),
+                              WS_OVERLAPPEDWINDOW, this->GetPosX(),
+                              this->GetPosY(), this->GetWidth(),
+                              this->GetHeight(), NULL, NULL, hInstance, NULL);
 }

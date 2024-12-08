@@ -107,8 +107,9 @@ public:
  */
 class WINPLUS_API WindowPlus : WinSizePlus, WinPosPlus {
 public:
-  const string Title; /**< Window title.  */
-  u32 Id;             /**< Unique identifier for the window */
+  const string Title;     /**< Window title.  */
+  const wstring ClassName; /**< Window class name. */
+  u32 Id;                 /**< Unique identifier for the window */
 
   /**
    * Closes a window.

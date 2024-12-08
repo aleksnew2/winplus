@@ -187,6 +187,14 @@ typedef uintptr_t uptr;
  */
 typedef std::string string;
 
+/* Wide string type.
+ *
+ * A typedef for std::wstring providing a wide string type.
+ * Used for Unicode text manipulation, wide string storage, and wide string operations.
+ * Manages dynamic wide character arrays with automatic memory handling.
+ */
+typedef std::wstring wstring;
+
 /* 16-bit character type.
  *
  * A typedef for char16_t providing a 16-bit character type.
