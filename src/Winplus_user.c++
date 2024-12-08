@@ -2,12 +2,15 @@
 #include <cassert>
 #include <cmath>
 #include <cstddef>
+#include <iostream>
 #include <libloaderapi.h>
 #include <minwindef.h>
 #include <random>
 #include <string>
 #include <windows.h>
 #include <winnt.h>
+
+using namespace winplus;
 
 WINPLUS_API void WinSizePlus::SetWidth(u16 newData) { this->Width = newData; }
 WINPLUS_API void WinSizePlus::SetHeight(u16 newData) { this->Height = newData; }
@@ -21,18 +24,24 @@ WINPLUS_API void WinPosPlus::SetPosY(i16 newData) { this->PosY = newData; }
 WINPLUS_API i16 WinPosPlus::GetPosX() const { return this->PosX; }
 WINPLUS_API i16 WinPosPlus::GetPosY() const { return this->PosY; }
 
-WINPLUS_API WinMessageBoxPlus WMB_Init(string Title, string ClassName) {
+WINPLUS_API WinMessageBoxPlus winplus::WMB_Init(string Title,
+                                                string ClassName) {
   return WinMessageBoxPlus{Title, ClassName, GenerateID()};
 }
 
-// WINPLUS_API WindowPlus WP_Init(i16 x, i16 y, u16 width, u16 height,
-//                                const string Title) {
-//   WinPosPlus position = {x, y};
-//   WinSizePlus size = {width, height};
-//   return WindowPlus{size, position, Title, GenerateID()};
-// }
+WINPLUS_API WindowPlus winplus::WP_Init(i16 x, i16 y, u16 width, u16 height,
+                                        const string Title) {
+  WindowPlus wp_instance = {};
+  wp_instance.SetPosX(x);
+  wp_instance.SetPosY(y);
+  wp_instance.SetWidth(width);
+  wp_instance.SetHeight(height);
+  wp_instance.Title = Title;
+  wp_instance.Id = GenerateID();
+  return wp_instance;
+}
 
-WINPLUS_API u32 GenerateID() {
+WINPLUS_API u32 winplus::GenerateID() {
   u32 length = 9;
 
   u32 lower_bound = std::pow(10, length - 1);
@@ -60,32 +69,56 @@ WINPLUS_API void WinMessageBoxPlus::SetType(WMB_Type type) {
 }
 
 WINPLUS_API void WindowPlus::Open() {
-  auto windowProc = [](HWND hwnd, UINT uMsg, WPARAM wParam,
-                       LPARAM lParam) -> LRESULT CALLBACK {
+  auto WindowProc = [](HWND hwnd, UINT uMsg, WPARAM wParam,
+                       LPARAM lParam) -> LRESULT {
     switch (uMsg) {
     case WM_CLOSE:
       DestroyWindow(hwnd);
       break;
+    case WM_DESTROY:
+      PostQuitMessage(0);
+      break;
+    default:
+      return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
-
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+    return 0;
   };
 
   HINSTANCE hInstance = (HINSTANCE)GetModuleHandle(NULL);
-  wstring wClassName =
-      std::wstring(this->ClassName.begin(), this->ClassName.end());
-  const wchar_t *CLASS_NAME = wClassName.c_str();
+  const wchar_t *CLASS_NAME = L"MyWindowClass";
 
-  WNDCLASS wc = {};
-  wc.lpfnWndProc = windowProc;
+  WNDCLASSW wc = {};
+  wc.lpfnWndProc = WindowProc;
   wc.hInstance = hInstance;
-  wc.lpszClassName = reinterpret_cast<LPCSTR>(CLASS_NAME);
+  wc.lpszClassName = CLASS_NAME;
+  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+  wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+  wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 
-  RegisterClass(&wc);
+  if (!RegisterClassW(&wc)) {
+    // std::wcout << L"Failed to register window class! Error code: " << error
+    //            << std::endl;
+    return;
+  }
 
-  HWND hwnd = CreateWindowExA(0, reinterpret_cast<LPCSTR>(CLASS_NAME),
-                              reinterpret_cast<LPCSTR>(Title.c_str()),
-                              WS_OVERLAPPEDWINDOW, this->GetPosX(),
-                              this->GetPosY(), this->GetWidth(),
-                              this->GetHeight(), NULL, NULL, hInstance, NULL);
+  std::wstring wTitle(this->Title.begin(), this->Title.end());
+
+  HWND hwnd =
+      CreateWindowExW(0, CLASS_NAME, wTitle.c_str(), WS_OVERLAPPEDWINDOW,
+                      this->GetPosX(), this->GetPosY(), this->GetWidth(),
+                      this->GetHeight(), NULL, NULL, hInstance, NULL);
+
+  if (!hwnd) {
+    // std::wcout << L"Failed to create window!" << std::endl;
+    return;
+  }
+
+  ShowWindow(hwnd, SW_SHOWNORMAL);
+  UpdateWindow(hwnd);
+
+  MSG msg = {};
+  while (GetMessage(&msg, NULL, 0, 0)) {
+    TranslateMessage(&msg);
+    DispatchMessage(&msg);
+  }
 }

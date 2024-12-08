@@ -1,7 +1,8 @@
 #include "include/Winplus.hpp"
+#include <print>
 
-int main() {
-  auto msg = WMB_Init("HI!", "@");
-  msg.SetType(WMB_ERROR);
-  msg.Open();
+int main() { 
+  auto window = winplus::WP_Init(50, 60, 500, 500, "Window"); 
+  std::println("{}", window.Id);
+  window.Open();
 }

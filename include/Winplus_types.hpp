@@ -7,6 +7,8 @@
 #ifndef WINPLUS_TYPES_H
 #define WINPLUS_TYPES_H
 
+namespace winplus {
+
 /* 8-bit signed integer type.
  *
  * A typedef for int8_t providing a consistent naming scheme for 8-bit signed
@@ -42,7 +44,8 @@ typedef int32_t i32;
  * A typedef for int64_t providing a consistent naming scheme for 64-bit signed
  * integers. Used for large numeric values, timestamps, and file sizes.
  *
- * Range: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 ([-2^63, 2^63 - 1])
+ * Range: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 ([-2^63, 2^63
+ * - 1])
  */
 typedef int64_t i64;
 
@@ -190,8 +193,9 @@ typedef std::string string;
 /* Wide string type.
  *
  * A typedef for std::wstring providing a wide string type.
- * Used for Unicode text manipulation, wide string storage, and wide string operations.
- * Manages dynamic wide character arrays with automatic memory handling.
+ * Used for Unicode text manipulation, wide string storage, and wide string
+ * operations. Manages dynamic wide character arrays with automatic memory
+ * handling.
  */
 typedef std::wstring wstring;
 
@@ -236,7 +240,8 @@ typedef unsigned long ul32;
  * A typedef for long long providing a signed 64-bit integer type.
  * Used for large numeric values, timestamps, and file sizes.
  *
- * Range: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 ([-2^63, 2^63 - 1])
+ * Range: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 ([-2^63, 2^63
+ * - 1])
  */
 typedef long long ll64;
 
@@ -248,5 +253,7 @@ typedef long long ll64;
  * Range: 0 to 18,446,744,073,709,551,615 ([0, 2^64 - 1])
  */
 typedef unsigned long long ull64;
+
+} // namespace winplus
 
 #endif

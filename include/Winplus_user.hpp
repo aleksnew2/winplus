@@ -7,6 +7,8 @@
 #ifndef WINPLUS_USER_H
 #define WINPLUS_USER_H
 
+namespace winplus {
+
 /**
  * Enumeration of message box types with predefined styles.
  *
@@ -31,6 +33,7 @@ struct WinSizePlus {
   u16 Width;  /**< Width of the window in pixels */
   u16 Height; /**< Height of the window in pixels */
 
+  virtual ~WinSizePlus() = default;
   /** Sets window width. */
   virtual WINPLUS_API void SetWidth(u16 newData);
   /** Sets window height. */
@@ -51,13 +54,14 @@ struct WinPosPlus {
   i16 PosX; /**< X-coordinate of the window position */
   i16 PosY; /**< Y-coordinate of the window position */
 
-  /** Sets window width. */
+  virtual ~WinPosPlus() = default;
+  /** Sets window X position. */
   virtual WINPLUS_API void SetPosX(i16 newData);
-  /** Sets window height. */
+  /** Sets window Y position. */
   virtual WINPLUS_API void SetPosY(i16 newData);
-  /** Returns window width. */
+  /** Returns window X position. */
   virtual WINPLUS_API i16 GetPosX() const;
-  /** Returns window height. */
+  /** Returns window Y position. */
   virtual WINPLUS_API i16 GetPosY() const;
 };
 
@@ -69,7 +73,7 @@ struct WinPosPlus {
  */
 class WINPLUS_API WinMessageBoxPlus {
 public:
-  const string Title;     /**< Window title. */
+  string Title;     /**< Window title. */
   const string ClassName; /**< Window class name. */
   u32 Id;                 /**< Unique identifier for the message box */
   WMB_Type Type;          /**< Message box type. */
@@ -105,10 +109,10 @@ public:
  * Combines window size, position, title, and identifier into a single
  * structure. Useful for comprehensive window management and manipulation.
  */
-class WINPLUS_API WindowPlus : WinSizePlus, WinPosPlus {
+class WINPLUS_API WindowPlus : public WinSizePlus, public WinPosPlus {
 public:
-  const string Title;     /**< Window title.  */
-  const wstring ClassName; /**< Window class name. */
+  string Title;     /**< Window title.  */
+  const string ClassName; /**< Window class name. */
   u32 Id;                 /**< Unique identifier for the window */
 
   /**
@@ -128,40 +132,60 @@ public:
   WINPLUS_API void Open();
 
   /**
-   * Gets the width of a window.
+   * Sets window width.
    *
-   * Retrieves and returns the width of the specified window in pixels.
-   * Useful for layout and rendering calculations.
+   * Sets the width of the window to the specified value.
    */
-  WINPLUS_API u16 GetWidth() const;
+  WINPLUS_API void SetWidth(u16 newData) override { Width = newData; }
 
   /**
-   * Gets the height of a window.
+   * Sets window height.
    *
-   * Retrieves and returns the height of the specified window in pixels.
-   * Useful for layout and rendering calculations.
+   * Sets the height of the window to the specified value.
    */
-  WINPLUS_API u16 GetHeight() const;
+  WINPLUS_API void SetHeight(u16 newData) override { Height = newData; }
 
   /**
-   * Gets the X-coordinate of a window's position.
+   * Returns window width.
    *
-   * Retrieves and returns the X-coordinate of the specified window's position.
-   * Useful for positioning and alignment operations.
+   * Returns the current width of the window.
    */
-  WINPLUS_API i16 GetPosX() const;
+  WINPLUS_API u16 GetWidth() const override { return Width; }
 
   /**
-   * Gets the Y-coordinate of a window's position.
+   * Returns window height.
    *
-   * Retrieves and returns the Y-coordinate of the specified window's position.
-   * Useful for positioning and alignment operations.
+   * Returns the current height of the window.
    */
-  WINPLUS_API i16 GetPosY() const;
+  WINPLUS_API u16 GetHeight() const override { return Height; }
 
-private:
-  LRESULT CALLBACK windowProc(HWND hwnd, UINT uMsg, WPARAM wParam,
-                              LPARAM lParam);
+  /**
+   * Sets window X position.
+   *
+   * Sets the X-coordinate of the window position to the specified value.
+   */
+  WINPLUS_API void SetPosX(i16 newData) override { PosX = newData; }
+
+  /**
+   * Sets window Y position.
+   *
+   * Sets the Y-coordinate of the window position to the specified value.
+   */
+  WINPLUS_API void SetPosY(i16 newData) override { PosY = newData; }
+
+  /**
+   * Returns window X position.
+   *
+   * Returns the current X-coordinate of the window position.
+   */
+  WINPLUS_API i16 GetPosX() const override { return PosX; }
+
+  /**
+   * Returns window Y position.
+   *
+   * Returns the current Y-coordinate of the window position.
+   */
+  WINPLUS_API i16 GetPosY() const override { return PosY; }
 };
 
 // class WINPLUS_API WinComponentPlus{
@@ -192,5 +216,7 @@ WINPLUS_API WindowPlus WP_Init(i16 x, i16 y, u16 width, u16 height,
  * Useful for tracking and managing.
  */
 WINPLUS_API u32 GenerateID();
+
+}
 
 #endif
