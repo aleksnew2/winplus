@@ -16,5 +16,5 @@ WINPLUS_API u32 GenerateID();
  * Computes and returns a unique error code.
  * Useful for generating platform-independent error codes.
  */
-WINPLUS_API u32 GenerateErrorCode();
+WINPLUS_API u16 GenerateErrorCode();
 } // namespace winplus::rand
