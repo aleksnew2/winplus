@@ -12,7 +12,7 @@ namespace winplus::error {
  * directly. Useful for halting execution when an unrecoverable error occurs.
  * Outputs error before stopping program process.
  */
-WINPLUS_API void StopProcess(winplus::error_code error);
+WINPLUS_API void StopProcess(winplus::error_code code, const string message);
 
 /**
  * Logs an error code.
@@ -21,7 +21,7 @@ WINPLUS_API void StopProcess(winplus::error_code error);
  * Useful for debugging and logging errors that do not require process
  * termination. Does not halt execution of the program.
  */
-WINPLUS_API void Log(winplus::error_code error);
+WINPLUS_API void Log(winplus::error_code code, const string message);
 } // namespace winplus::error
 
 #endif
