@@ -1,6 +1,9 @@
 #include "Winplus_defines.hpp"
 #include "Winplus_types.hpp"
 
+#ifndef WINPLUS_ERROR_H
+#define WINPLUS_ERROR_H
+
 namespace winplus::error {
 /**
  * Terminates the current process with an error code.
@@ -20,3 +23,5 @@ WINPLUS_API void StopProcess(winplus::error_code error);
  */
 WINPLUS_API void Log(winplus::error_code error);
 } // namespace winplus::error
+
+#endif

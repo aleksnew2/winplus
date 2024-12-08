@@ -1,6 +1,9 @@
 #include "Winplus_defines.hpp"
 #include "Winplus_types.hpp"
 
+#ifndef WINPLUS_RAND_H
+#define WINPLUS_RAND_H
+
 namespace winplus::rand {
 /**
  * Generates a unique identifier.
@@ -18,3 +21,4 @@ WINPLUS_API u32 GenerateID();
  */
 WINPLUS_API u16 GenerateErrorCode();
 } // namespace winplus::rand
+#endif
