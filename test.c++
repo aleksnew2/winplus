@@ -2,7 +2,7 @@
 #include <print>
 
 int main() { 
-  auto window = winplus::WP_Init(50, 60, 500, 500, "Window"); 
+  auto window = winplus::user::WP_Init(50, 60, 500, 500, "Window"); 
   std::println("{}", window.Id);
   window.Open();
 }

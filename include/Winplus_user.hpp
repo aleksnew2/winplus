@@ -7,7 +7,7 @@
 #ifndef WINPLUS_USER_H
 #define WINPLUS_USER_H
 
-namespace winplus {
+namespace winplus::user {
 
 /**
  * Enumeration of message box types with predefined styles.
@@ -208,15 +208,6 @@ WINPLUS_API WinMessageBoxPlus WMB_Init(string Title, string ClassName);
  */
 WINPLUS_API WindowPlus WP_Init(i16 x, i16 y, u16 width, u16 height,
                                const string Title);
-
-/**
- * Generates a unique identifier.
- *
- * Computes and returns a unique identifier.
- * Useful for tracking and managing.
- */
-WINPLUS_API u32 GenerateID();
-
 }
 
 #endif
