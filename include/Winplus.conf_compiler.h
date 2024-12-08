@@ -200,8 +200,6 @@ public:
    * all tokens found in the source. It continues scanning until it reaches the
    * end of the file or encounters an error token. If an error token is encountered,
    * it will be included as the last token in the returned vector.
-   *
-   * @return A vector of Token objects representing all tokens in the source code.
    */
   std::vector<Token> tokenize();
 
@@ -216,9 +214,7 @@ private:
 
 namespace parser {
 
-/**
- * Represents an enumeration entry in the configuration
- */
+
 struct EnumEntry {
   int id;
   std::string type;
@@ -226,49 +222,73 @@ struct EnumEntry {
   int enumId;
 };
 
-/**
- * Parser for the configuration language
- */
+
 class WINPLUS_API Parser {
 public:
   explicit Parser(const std::vector<lexer::Lexer::Token>& tokens) 
     : tokens_(tokens), current_(0) {}
 
-  /**
-   * Parse the entire configuration file
-   * @return Vector of parsed enumeration entries
-   */
   std::vector<EnumEntry> parse();
 
 private:
   /**
-   * Parse a single enumeration entry
-   * @return Parsed enumeration entry
+   * Parses an enumeration declaration from the token stream.
+   *
+   * This function takes the current token stream and parses an enumeration
+   * declaration. It expects the enumeration declaration to be of the form:
+   *
+   *     enumeration [number]:
+   *       type: '[value]'
+   *       title: '[value]'
+   *       id: [number]
+   *
+   * The function returns an EnumEntry containing the parsed values.
    */
   EnumEntry parseEnumeration();
 
   /**
-   * Get the current token
+   * Peeks at the next token in the token stream without consuming it.
+   *
+   * Returns the token at the current position in the token stream
+   * without advancing the `current_` index. If the end of input has been
+   * reached, returns the last token.
    */
   lexer::Lexer::Token peek() const;
 
   /**
-   * Get the next token
+   * Advances the current position in the token stream by one token.
+   *
+   * This function returns the current token in the token stream, then
+   * increments the `current_` index to point to the next token. If the
+   * end of the input has been reached, returns the last token.
    */
   lexer::Lexer::Token advance();
 
   /**
-   * Check if the current token matches the expected type
+   * Checks if the next token in the token stream matches the given type.
+   *
+   * This function returns true if the next token in the token stream has the
+   * given type and false otherwise. If the end of the input has been reached,
+   * returns false.
    */
   bool check(lexer::Lexer::TokenType type) const;
 
   /**
-   * Consume a token of the expected type or throw an error
+   * Consumes the next token in the token stream if it matches the given type.
+   *
+   * This function checks if the next token in the token stream matches the
+   * given type. If it does, the function returns the consumed token and
+   * advances the `current_` index to point to the next token. If the end of the
+   * input has been reached, or if the next token does not match the given type,
+   * this function throws an std::runtime_error with the given message.
    */
   lexer::Lexer::Token consume(lexer::Lexer::TokenType type, const std::string& message);
 
   /**
-   * Check if we've reached the end of input
+   * Checks if the current token is at the end of the token stream.
+   *
+   * Returns true if the current token is the last token in the token stream,
+   * and false otherwise.
    */
   bool isAtEnd() const;
 

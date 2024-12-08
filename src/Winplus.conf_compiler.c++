@@ -194,6 +194,11 @@ EnumEntry Parser::parseEnumeration() {
   auto typeToken = consume(lexer::Lexer::TokenType::STRING_LITERAL, "Expected type value");
   entry.type = typeToken.lexeme;
 
+  // Validate type value
+  if (entry.type != "error" && entry.type != "app_id") {
+    throw std::runtime_error("Invalid type value: '" + entry.type + "'. Expected 'error' or 'app_id'");
+  }
+
   // Parse: title: '[value]'
   consume(lexer::Lexer::TokenType::TITLE, "Expected 'title'");
   consume(lexer::Lexer::TokenType::COLON, "Expected ':' after 'title'");
