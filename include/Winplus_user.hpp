@@ -163,9 +163,9 @@ private:
                               LPARAM lParam);
 };
 
-class WINAPI WinComponentPlus{
+// class WINPLUS_API WinComponentPlus{
 
-};
+// };
 
 /**
  * Initializes a new message box.
