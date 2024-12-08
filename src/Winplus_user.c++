@@ -9,25 +9,33 @@
 
 using namespace winplus;
 
-WINPLUS_API void user::WinSizePlus::SetWidth(u16 newData) { this->Width = newData; }
-WINPLUS_API void user::WinSizePlus::SetHeight(u16 newData) { this->Height = newData; }
+WINPLUS_API void user::WinSizePlus::SetWidth(u16 newData) {
+  this->Width = newData;
+}
+WINPLUS_API void user::WinSizePlus::SetHeight(u16 newData) {
+  this->Height = newData;
+}
 
 WINPLUS_API u16 user::WinSizePlus::GetWidth() const { return this->Width; }
 WINPLUS_API u16 user::WinSizePlus::GetHeight() const { return this->Height; }
 
-WINPLUS_API void user::WinPosPlus::SetPosX(i16 newData) { this->PosX = newData; }
-WINPLUS_API void user::WinPosPlus::SetPosY(i16 newData) { this->PosY = newData; }
+WINPLUS_API void user::WinPosPlus::SetPosX(i16 newData) {
+  this->PosX = newData;
+}
+WINPLUS_API void user::WinPosPlus::SetPosY(i16 newData) {
+  this->PosY = newData;
+}
 
 WINPLUS_API i16 user::WinPosPlus::GetPosX() const { return this->PosX; }
 WINPLUS_API i16 user::WinPosPlus::GetPosY() const { return this->PosY; }
 
 WINPLUS_API user::WinMessageBoxPlus user::WMB_Init(string Title,
-                                                string ClassName) {
+                                                   string ClassName) {
   return WinMessageBoxPlus{Title, ClassName, rand::GenerateID()};
 }
 
 WINPLUS_API user::WindowPlus user::WP_Init(i16 x, i16 y, u16 width, u16 height,
-                                        const string Title) {
+                                           const string Title) {
   WindowPlus wp_instance = {};
   wp_instance.SetPosX(x);
   wp_instance.SetPosY(y);

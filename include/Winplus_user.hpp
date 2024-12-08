@@ -73,7 +73,7 @@ struct WinPosPlus {
  */
 class WINPLUS_API WinMessageBoxPlus {
 public:
-  string Title;     /**< Window title. */
+  string Title;           /**< Window title. */
   const string ClassName; /**< Window class name. */
   u32 Id;                 /**< Unique identifier for the message box */
   WMB_Type Type;          /**< Message box type. */
@@ -111,7 +111,7 @@ public:
  */
 class WINPLUS_API WindowPlus : public WinSizePlus, public WinPosPlus {
 public:
-  string Title;     /**< Window title.  */
+  string Title;           /**< Window title.  */
   const string ClassName; /**< Window class name. */
   u32 Id;                 /**< Unique identifier for the window */
 
@@ -208,6 +208,6 @@ WINPLUS_API WinMessageBoxPlus WMB_Init(string Title, string ClassName);
  */
 WINPLUS_API WindowPlus WP_Init(i16 x, i16 y, u16 width, u16 height,
                                const string Title);
-}
+} // namespace winplus::user
 
 #endif
