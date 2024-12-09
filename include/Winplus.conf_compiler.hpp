@@ -45,7 +45,7 @@ public:
    */
   struct Token {
     TokenType type;
-    std::string lexeme;
+    string lexeme;
     int line;
 
     Token(TokenType t, std::string l, int ln)
@@ -216,10 +216,10 @@ namespace parser {
 
 
 struct EnumEntry {
-  int id;
-  std::string type;
-  std::string title;
-  int enumId;
+  u32 id;
+  winplus::string type;
+  winplus::string title;
+  u16 enumId;
 };
 
 

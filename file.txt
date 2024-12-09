@@ -5,5 +5,5 @@ enumeration 123:
 
 enumeration 12233:
     type: 'app_id'
-    title: 'Error sdsmessage'
-    id: 4562323;
+    title: 'Window title'
+    id: 129;
