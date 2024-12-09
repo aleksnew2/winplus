@@ -1,4 +1,4 @@
-#include "../include/Winplus.conf_compiler.h"
+#include "../include/Winplus.conf_compiler.hpp"
 #include <cctype>
 
 namespace winplus::compiler {

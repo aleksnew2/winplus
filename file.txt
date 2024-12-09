@@ -4,6 +4,6 @@ enumeration 123:
     id: 456;
 
 enumeration 12233:
-    type: 'error_sd'
+    type: 'app_id'
     title: 'Error sdsmessage'
     id: 4562323;

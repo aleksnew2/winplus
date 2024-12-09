@@ -238,8 +238,11 @@ private:
    * declaration. It expects the enumeration declaration to be of the form:
    *
    *     enumeration [number]:
+   *
    *       type: '[value]'
+   *
    *       title: '[value]'
+   *
    *       id: [number]
    *
    * The function returns an EnumEntry containing the parsed values.
